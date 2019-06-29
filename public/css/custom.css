@@ -1,2 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:600');
 
-/* your styles go here */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  text-align: center;
+}
+.main-container {
+  margin: 30px auto;
+  max-width: 1000px;
+  padding: 20px;
+}
+.only-so-big p {
+  padding: 0;
+  margin: 0;
+}
+p {
+  font-size: 15px;
+  line-height: 20px;
+}
+hr {
+  background: #ccc;
+  display: block;
+  height: 1px;
+  width: 100%;
+}
+
+
+/*
+  NECESSARY SECTION
+*/
+.only-so-big {
+  background: rgba(178, 252, 255, .3);
+  height: 200%;
+  max-height: 200px;
+  overflow: hidden;
+  -webkit-transition: max-height .75s;
+  transition: max-height .75s;
+}
+
+.read-more {
+  background: none;
+  border: none;
+  color: #1199f9;
+  cursor: pointer;
+  font-size: 1em;
+  outline: none; 
+}
+.read-more:hover {
+  text-decoration: underline;
+}
+.read-more:focus {
+  outline: none;
+}
+.read-more::-moz-focus-inner {
+  border: 0;
+}
+.hidden {
+  display: none;
+}

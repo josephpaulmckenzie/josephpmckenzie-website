@@ -1,0 +1,175 @@
+
+<head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:600');
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    h1 {
+      text-align: center;
+    }
+    .main-container {
+      margin: 30px auto;
+      max-width: 1000px;
+      padding: 20px;
+    }
+    .only-so-big p {
+      padding: 0;
+      margin: 0;
+    }
+    p {
+      font-size: 15px;
+      line-height: 20px;
+    }
+    hr {
+      background: #ccc;
+      display: block;
+      height: 1px;
+      width: 100%;
+    }
+
+
+    /*
+      NECESSARY SECTION
+    */
+    .only-so-big {
+      background: rgba(178, 252, 255, .3);
+      height: 100%;
+      max-height: 100px;
+      overflow: hidden;
+      -webkit-transition: max-height .75s;
+      transition: max-height .75s;
+    }
+
+    .read-more {
+      background: none;
+      border: none;
+      color: #1199f9;
+      cursor: pointer;
+      font-size: 1em;
+      outline: none; 
+    }
+    .read-more:hover {
+      text-decoration: underline;
+    }
+    .read-more:focus {
+      outline: none;
+    }
+    .read-more::-moz-focus-inner {
+      border: 0;
+    }
+    .hid {
+      display: none;
+    }
+
+</style>
+</head>
+
+
+<!-- begin snippet: js hide: false console: true babel: null -->
+
+
+
+    <div class="main-container">
+
+          <div class="only-so-big">
+            <p>This one has way too much content to show. Best be saving it for those who want to read everything in here.</p>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+              voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi THE END!Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+              voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi THE END!</p>
+          </div>
+        </div>
+
+<!-- language: lang-js -->
+<script>
+    // Create Variables
+    var allOSB = [];
+    var mxh = '';
+
+    window.onload = function() {
+      // Set Variables
+      allOSB = document.getElementsByClassName("only-so-big");
+      
+      if (allOSB.length > 0) {
+        mxh = window.getComputedStyle(allOSB[0]).getPropertyValue('max-height');
+        mxh = parseInt(mxh.replace('px', ''));
+        
+        // Add read-more button to each OSB section
+        for (var i = 0; i < allOSB.length; i++) {
+          var el = document.createElement("button");
+          el.innerHTML = "Read More";
+          el.setAttribute("type", "button");
+          el.setAttribute("class", "read-more hid");
+          
+        insertAfter(allOSB[i], el);
+        }
+      }
+
+      // Add click function to buttons
+      var readMoreButtons = document.getElementsByClassName("read-more");
+      for (var i = 0; i < readMoreButtons.length; i++) {
+        readMoreButtons[i].addEventListener("click", function() { 
+          revealThis(this);
+        }, false);
+      }
+      
+      // Update buttons so only the needed ones show
+      updateReadMore();
+    }
+    // Update on resize
+    window.onresize = function() {
+      updateReadMore();
+    }
+
+    // show only the necessary read-more buttons
+    function updateReadMore() {
+      if (allOSB.length > 0) {
+        for (var i = 0; i < allOSB.length; i++) {
+          if (allOSB[i].scrollHeight > mxh) {
+            if (allOSB[i].hasAttribute("style")) {
+              updateHeight(allOSB[i]);
+            }
+            allOSB[i].nextElementSibling.className = "read-more";
+          } else {
+           allOSB[i].nextElementSibling.className = "read-more";
+          }
+        }
+      }
+    }
+
+    function revealThis(current) {
+      var el = current.previousElementSibling;
+      if (el.hasAttribute("style")) {
+        current.innerHTML = "Read More";
+        el.removeAttribute("style");
+      } else {
+        updateHeight(el);
+        current.innerHTML = "Show Less";
+      }
+    }
+
+    function updateHeight(el) {
+      el.style.maxHeight = el.scrollHeight + "px";
+    }
+
+    // thanks to karim79 for this function
+    // http://stackoverflow.com/a/4793630/5667951
+    function insertAfter(referenceNode, newNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
+</script>
+<!-- end snippet -->
+

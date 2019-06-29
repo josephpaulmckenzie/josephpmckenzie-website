@@ -135,15 +135,10 @@
       <ul data-animate="fadeInUp" class="owl-carousel owl-theme testimonials equalize-height">
         <li class="item">
           <div class="testimonial full-height">
-            <div class="text">
-              <p>I had the pleasure of going through the same bootcamp as Joe and then working with him at Mined Minds.
-                He has a strong passion for tech and learning new tech. He is up for any challenge. In my whole time
-                working and learning with him I have never seen him give up. He works until he figures out the answer to
-                whatever it is he is trying to do. His skills with AWS are amazing. If it is something he hasn't done
-                before he figures it out very quickly. He is a great team member. You know you can depend on him to get
-                his part of the project completed. He is someone I loved working with and would highly recommend him as
-                a great addition to any team.</p>
-            </div>
+              <div class="only-so-big">
+            <p>I had the pleasure of going through the same bootcamp as Joe and then working with him at Mined Minds. He has a strong passion for tech and learning new tech. He is up for any challenge. In my whole time working and learning with him I have never seen him give up.</p>
+            <p>I had the pleasure of going through the same bootcamp as Joe and then working with him at Mined Minds. He has a strong passion for tech and learning new tech. He is up for any challenge. In my whole time working and learning with him I have never seen him give up. He works until he figures out the answer to whatever it is he is trying to do. His skills with AWS are amazing. If it is something he hasn't done before he figures it out very quickly. He is a great team member. You know you can depend on him to get his part of the project completed. He is someone I loved working with and would highly recommend him as a great addition to any team. </p>
+          </div>
             <div class="bottom">
               <div class="icon"><i class="fa fa-quote-left"></i></div>
               <div class="name-picture">
@@ -603,6 +598,82 @@
   <script src="vendor/jquery.counterup/jquery.counterup.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"> </script>
   <script src="js/front.js"></script>
+  <script>
+    var allOSB = [];
+    var mxh = '';
+
+    window.onload = function() {
+      allOSB = document.getElementsByClassName("only-so-big");
+      
+      if (allOSB.length > 0) {
+        mxh = window.getComputedStyle(allOSB[0]).getPropertyValue('max-height');
+        mxh = parseInt(mxh.replace('px', ''));
+        
+        // Add read-more button to each OSB section
+        for (var i = 0; i < allOSB.length; i++) {
+          var el = document.createElement("button");
+          el.innerHTML = "Read More";
+          el.setAttribute("type", "button");
+          el.setAttribute("class", "read-more hid");
+          
+        insertAfter(allOSB[i], el);
+        }
+      }
+
+      // Add click function to buttons
+      var readMoreButtons = document.getElementsByClassName("read-more");
+      for (var i = 0; i < readMoreButtons.length; i++) {
+        readMoreButtons[i].addEventListener("click", function() { 
+          revealThis(this);
+        }, false);
+      }
+      
+      // Update buttons so only the needed ones show
+      updateReadMore();
+    }
+    // Update on resize
+    window.onresize = function() {
+      updateReadMore();
+    }
+
+    // show only the necessary read-more buttons
+    function updateReadMore() {
+      if (allOSB.length > 0) {
+        for (var i = 0; i < allOSB.length; i++) {
+          if (allOSB[i].scrollHeight > mxh) {
+            if (allOSB[i].hasAttribute("style")) {
+              updateHeight(allOSB[i]);
+            }
+            allOSB[i].nextElementSibling.className = "read-more";
+          } else {
+           allOSB[i].nextElementSibling.className = "read-more hidden";
+          }
+        }
+      }
+    }
+
+    function revealThis(current) {
+      var el = current.previousElementSibling;
+      if (el.hasAttribute("style")) {
+        current.innerHTML = "Read More";
+        el.removeAttribute("style");
+      } else {
+        updateHeight(el);
+        console.log(el)
+        current.innerHTML = "Show Less";
+      }
+    }
+
+    function updateHeight(el) {
+      el.style.maxHeight = el.scrollHeight + "px";
+    }
+
+    // thanks to karim79 for this function
+    // http://stackoverflow.com/a/4793630/5667951
+    function insertAfter(referenceNode, newNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
+</script>
 </body>
 
 </html>
