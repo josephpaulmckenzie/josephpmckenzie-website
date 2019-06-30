@@ -8,7 +8,7 @@ def email_options()
     :user_name =>ENV['from'],
     :password => ENV["password"],
     :authentication => :plain, 
-    :domain =>'www.josephpmckenzie.com' 
+    :domain =>'josephpmckenzie.herokuapp.com' 
     }
 end
 
