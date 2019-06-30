@@ -18,7 +18,7 @@ post '/contact' do
     message = params[:message]
 
     send_email('Thank You For Contacting Me.', {name: name, phone: phone, email: email, message: message})
-
+redirect '/'
 puts "CONTACT !!! #{firstname}"
 
 end

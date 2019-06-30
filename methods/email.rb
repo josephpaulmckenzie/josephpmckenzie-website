@@ -8,7 +8,7 @@ def email_options()
     :user_name =>ENV['from'],
     :password => ENV["password"],
     :authentication => :plain, 
-    :domain =>'josephpmckenzie.herokuapp.com' 
+    :domain => ENV["domain"] 
     }
 end
 
@@ -27,4 +27,5 @@ def send_email(title, details)
 	rescue  => error
 		puts "Error sending email #{error}"
 	end
+	puts "sent email??"
 end
