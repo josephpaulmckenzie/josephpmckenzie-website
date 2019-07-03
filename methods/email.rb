@@ -8,7 +8,7 @@ def email_options()
     :user_name =>ENV['from'],
     :password => ENV["password"],
     :authentication => :plain, 
-    :domain => ENV["domain"] 
+    :domain => 'localhost:4567'
     }
 end
 
