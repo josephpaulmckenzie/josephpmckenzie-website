@@ -16,7 +16,7 @@ def send_email(title, details)
 	begin
 		Pony.mail(
 		  :to => details[:email],
-		  :cc => ENV["cc"],
+		  :cc => "joseph.p.mckenzie84@gmail.com",
 		  :from => ENV["from"],
 		  :subject => "Hello from Joseph Mckenzie", 
 		  :content_type => 'text/html', 
