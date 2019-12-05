@@ -7,6 +7,3 @@ get '/' do
 puts "hi"
     return "hi"
 end
-
-
-end
