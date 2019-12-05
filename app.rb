@@ -4,12 +4,12 @@ load "./local_env.rb" if File.exists?("./local_env.rb")
 
 
 get '/' do
-
+puts "hi"
     erb :index
 end
 
 post '/contact' do
-
+puts "yo"
     firstname = params[:firstname]
     lastname = params[:lastname]
     name = "#{firstname} #{lastname}"
