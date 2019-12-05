@@ -8,12 +8,13 @@ def email_options()
     :user_name =>ENV['from'],
     :password => ENV["password"],
     :authentication => :plain, 
-    :domain => 'localhost:4567'
+    :domain => ENV['domain']
     }
 end
 
 def send_email(title, details)
 	begin
+puts "email"
 		Pony.mail(
 		  :to => details[:email],
 		  :cc => "joseph.p.mckenzie84@gmail.com",
