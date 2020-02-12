@@ -35,12 +35,11 @@ puts "email"
 	puts "sent email??"
 end
 get '/' do
-puts "hi"
     erb :index
 end
 
 post '/contact' do
-puts "yo"
+
     firstname = params[:firstname]
     lastname = params[:lastname]
     name = "#{firstname} #{lastname}"
@@ -49,6 +48,6 @@ puts "yo"
     message = params[:message]
 
     send_email('Thank You For Contacting Me.', {name: name, phone: phone, email: email, message: message})
-return "hi"
+	redirect '/'
 
 end
