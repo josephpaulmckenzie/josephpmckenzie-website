@@ -37,7 +37,12 @@ puts "email"
 	puts "sent email??"
 end
 get '/' do
+    puts "IM IN INDEX !!!!!!!!!!!!!!!!!!"
     erb :index
+
+    puts "IM IN on bottom INDEX !!!!!!!!!!!!!!!!!!"
+
+  
 end
 
 post '/contact' do
